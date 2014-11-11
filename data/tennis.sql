@@ -3,19 +3,16 @@ CREATE DATABASE TENNIS;
 USE TENNIS; 
 
 -- Schema:
--- MEMBER (mID, name, level)
--- COURT (cID, inside, VIP, pricePerHour)
--- RESERVATION (mID, cID, reserveDate, reserveTime, paid)
--- EQUIPMENT (mID, borrowDate, numRacket, returned)
--- DISCOUNT (level, percent)
-
--- MEMBER (mID, name, level)
+-- MEMBER (mID, username, password, name, level)
 DROP TABLE IF EXISTS MEMBER;
 CREATE TABLE MEMBER (
-	mID INT,
+	mID INT NOT NULL AUTO_INCREMENT,
+	username VARCHAR(50),
+	password VARCHAR(50),
 	name VARCHAR(50),
-	level INT,
-	PRIMARY KEY(mID)
+	level INT DEFAULT 0,
+	PRIMARY KEY(mID),
+	UNIQUE(username)
 );
 
 -- COURT (cID, inside, VIP, pricePerHour)
