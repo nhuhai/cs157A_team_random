@@ -3,47 +3,45 @@ CREATE DATABASE TENNIS;
 USE TENNIS; 
 
 -- Schema:
--- MEMBER (mID, username, password, name, level)
+-- MEMBER (username, password, name, level)
 DROP TABLE IF EXISTS MEMBER;
 CREATE TABLE MEMBER (
-	mID INT NOT NULL AUTO_INCREMENT,
 	username VARCHAR(50),
 	password VARCHAR(50),
 	name VARCHAR(50),
 	level INT DEFAULT 0,
-	PRIMARY KEY(mID),
-	UNIQUE(username)
+	PRIMARY KEY(username)
 );
 
 -- COURT (cID, inside, VIP, pricePerHour)
 DROP TABLE IF EXISTS COURT;
 CREATE TABLE COURT (
 	cID INT,
-	inside BOOLEAN DEFAULT FALSE, -- ?
-	VIP BOOLEAN DEFAULT FALSE, -- ?
+	inside BOOLEAN DEFAULT FALSE,
+	VIP BOOLEAN DEFAULT FALSE,
 	pricePerHour INT,
 	PRIMARY KEY(cID)
 );
 
--- RESERVATION (mID, cID, reserveDate, reserveTime, paid)
+-- RESERVATION (username, cID, reserveDate, reserveTime, paid)
 DROP TABLE IF EXISTS RESERVATION;
 CREATE TABLE RESERVATION (
-	mID INT,
+	username VARCHAR(50),
 	cID INT,
 	reserveDate DATE DEFAULT '0000-00-00',
 	reserveTime INT,
 	paid BOOLEAN DEFAULT FALSE,
-	PRIMARY KEY(mID,cID,reserveDate,reserveTime)
+	PRIMARY KEY(username,cID,reserveDate,reserveTime)
 );
 
--- EQUIPMENT (mID, borrowDate, numRacket, returned)
+-- EQUIPMENT (username, borrowDate, numRacket, returned)
 DROP TABLE IF EXISTS EQUIPMENT;
 CREATE TABLE EQUIPMENT (
-	mID INT,
+	username VARCHAR(50),
 	borrowDate DATE DEFAULT '0000-00-00',
 	numRacket INT,
 	returned BOOLEAN DEFAULT FALSE,
-	PRIMARY KEY(mID,borrowDate)
+	PRIMARY KEY(username,borrowDate)
 );
 
 -- DISCOUNT (level, percent)
@@ -54,9 +52,8 @@ CREATE TABLE DISCOUNT (
 	PRIMARY KEY(level)
 );
 
--- Please do NOT use absolute path for the files!!!
-LOAD DATA LOCAL INFILE 'member.txt' INTO TABLE MEMBER;
+--LOAD DATA LOCAL INFILE 'member.txt' INTO TABLE MEMBER;
 --LOAD DATA LOCAL INFILE 'court.txt' INTO TABLE COURT;
 --LOAD DATA LOCAL INFILE 'reservation.txt' INTO TABLE RESERVATION;
 --LOAD DATA LOCAL INFILE 'equipment.txt' INTO TABLE EQUIPMENT;
-LOAD DATA LOCAL INFILE 'discount.txt' INTO TABLE DISCOUNT;
+--LOAD DATA LOCAL INFILE 'discount.txt' INTO TABLE DISCOUNT;

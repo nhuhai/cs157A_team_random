@@ -76,7 +76,6 @@ public class TennisDatabase {
         rs = statement.executeQuery(sql);
         
         while(rs.next()) {
-            int mId = rs.getInt("mID"); 
             String thisUsername = rs.getString("username");
             String thisPassword = rs.getString("password");
             String name = rs.getString("name");
