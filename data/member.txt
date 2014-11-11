@@ -1,0 +1,10 @@
+123	Katherine	3       
+456	Candis	4
+789	Shirley	1
+012	Jason	3
+345	Ethel	2
+678	Susan	1
+901	Suzanne	5
+234	Juanita	2       
+567	Margaret	5
+890	Chad	4
