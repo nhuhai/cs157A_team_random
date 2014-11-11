@@ -27,10 +27,14 @@ public class Dashboard extends javax.swing.JFrame {
         name.setText("Name: " + profile.get(0));
         level.setText("Level: " + profile.get(1));
         
-        DefaultListModel listModel = new DefaultListModel();;
-        listModel.addElement("item 1");
-        listModel.addElement("item 2");
+        DefaultListModel listModel = new DefaultListModel();
+        ArrayList<String> reserves = TennisDatabase.getReservation(this.username);
+        
+        reserves.stream().forEach((str) -> {
+            listModel.addElement(str);
+        });
         reserveList.setModel(listModel);
+        
     }
 
     /**

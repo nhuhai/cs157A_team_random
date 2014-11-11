@@ -1,7 +1,10 @@
-
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import java.sql.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -52,6 +55,11 @@ public class ReservationForm extends javax.swing.JFrame {
         jLabel1.setText("Court Number");
 
         submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Date");
 
@@ -143,6 +151,45 @@ public class ReservationForm extends javax.swing.JFrame {
             Logger.getLogger(ReservationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        int cID = Integer.parseInt(courtID.getText());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");    
+        
+        long currentTime = System.currentTimeMillis();
+        java.sql.Date date = new Date(currentTime);
+
+        try {
+            java.util.Date utilDate = dateFormat.parse(reserveDate.getText());
+            date = new java.sql.Date(utilDate.getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(ReservationForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        int time = Integer.parseInt(reserveTime.getText());
+        
+        int result = 0;
+        try {
+            result = TennisDatabase.reserveCourt(this.username, cID, date, time);
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (result > 0) {
+            JOptionPane.showMessageDialog(null, "Reservation succeed!");
+            Utility.close(this);
+            Dashboard dashboard;
+            try {
+                dashboard = new Dashboard(this.username);
+                dashboard.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(ReservationForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Reservation failed!");
+        }
+        
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField courtID;

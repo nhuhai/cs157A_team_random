@@ -9,6 +9,7 @@
  */
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -105,4 +106,51 @@ public class TennisDatabase {
     
         return count > 0;
     }
+    
+    // -- RESERVATION (username, cID, reserveDate, reserveTime, paid)
+    public static int reserveCourt(String username, int courtID, 
+            Date reserveDate, int reserveTime) throws SQLException {
+        String sql = "INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime) VALUES (?, ?, ?, ?)"; 
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, username);
+            pst.setInt(2, courtID);
+            pst.setDate(3, reserveDate);
+            pst.setInt(4, reserveTime);
+            
+            int result = pst.executeUpdate();
+            
+            return result;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return 0;
+        }
+    }
+    
+    // -- RESERVATION (username, cID, reserveDate, reserveTime, paid)
+    public static ArrayList<String> getReservation(String username) throws SQLException {
+        ArrayList<String> result = new ArrayList<>();
+        
+        String sql = "SELECT * FROM RESERVATION where username = ?";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1,username);
+        rs = pst.executeQuery();
+        
+        while(rs.next()) {
+            String thisUsername = rs.getString("username"); 
+            int courtID = rs.getInt("cID");
+            Date date = rs.getDate("reserveDate");
+            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");     
+            String dateStr = df.format(date);
+            
+            int time = rs.getInt("reserveTime");
+            
+            String outStr = "You've reserved " + "court #" + courtID + " on " + date + " at " + time;
+            result.add(outStr);
+        }
+        
+        return result;
+    }
+    
+    
 }
