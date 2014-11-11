@@ -57,8 +57,9 @@ CREATE TABLE DISCOUNT (
 	PRIMARY KEY(level)
 );
 
-LOAD DATA LOCAL INFILE '/Users/hainguyen/Documents/git/cs157A_team_random/data/member.txt' INTO TABLE MEMBER;
---LOAD DATA LOCAL INFILE 'path_to/court.txt' INTO TABLE COURT;
---LOAD DATA LOCAL INFILE 'path_to/reservation.txt' INTO TABLE RESERVATION;
---LOAD DATA LOCAL INFILE 'path_to/equipment.txt' INTO TABLE EQUIPMENT;
-LOAD DATA LOCAL INFILE '/Users/hainguyen/Documents/git/cs157A_team_random/data/discount.txt' INTO TABLE DISCOUNT;
+-- Please do NOT use absolute path for the files!!!
+LOAD DATA LOCAL INFILE 'member.txt' INTO TABLE MEMBER;
+--LOAD DATA LOCAL INFILE 'court.txt' INTO TABLE COURT;
+--LOAD DATA LOCAL INFILE 'reservation.txt' INTO TABLE RESERVATION;
+--LOAD DATA LOCAL INFILE 'equipment.txt' INTO TABLE EQUIPMENT;
+LOAD DATA LOCAL INFILE 'discount.txt' INTO TABLE DISCOUNT;
