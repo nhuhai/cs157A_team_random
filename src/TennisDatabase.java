@@ -151,6 +151,4 @@ public class TennisDatabase {
         
         return result;
     }
-    
-    
 }
