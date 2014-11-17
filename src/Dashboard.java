@@ -29,10 +29,11 @@ public class Dashboard extends javax.swing.JFrame {
         
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<String> reserves = TennisDatabase.getReservation(this.username);
+    
+        for (String reservation : reserves) {
+            listModel.addElement(reservation);
+        }
         
-        reserves.stream().forEach((str) -> {
-            listModel.addElement(str);
-        });
         reserveList.setModel(listModel);
         
     }
