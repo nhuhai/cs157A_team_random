@@ -8,10 +8,10 @@
  * @author hainguyen
  */
 
+import javax.swing.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 public class TennisDatabase {
     // JDBC driver name and database URL
@@ -70,7 +70,7 @@ public class TennisDatabase {
     public static ArrayList<String> getUserProfile(String username) 
             throws SQLException {
         
-        ArrayList<String> currentUser = new ArrayList<>();
+        ArrayList<String> currentUser = new ArrayList<String>();
         
         String sql = "SELECT * FROM MEMBER WHERE username = \"" + username + "\"";
         statement = conn.createStatement();
@@ -129,7 +129,7 @@ public class TennisDatabase {
     
     // -- RESERVATION (username, cID, reserveDate, reserveTime, paid)
     public static ArrayList<String> getReservation(String username) throws SQLException {
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<String> result = new ArrayList<String>();
         
         String sql = "SELECT * FROM RESERVATION where username = ?";
         pst = conn.prepareStatement(sql);
