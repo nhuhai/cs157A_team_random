@@ -142,6 +142,10 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="reserveListMousePressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="reserveListMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
