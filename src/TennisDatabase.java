@@ -151,4 +151,20 @@ public class TennisDatabase {
         
         return result;
     }
+    
+    public static ArrayList<String> getAvailableCourtsForDateAndTime(String date, String time) throws SQLException {
+        ArrayList<String> result = new ArrayList<String>();
+        
+        String sql = "SELECT distinct(cID) FROM RESERVATION where reserveDate = ? and reserveTime = ?";
+        
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, date);
+        pst.setString(2, time);
+        rs = pst.executeQuery();
+        
+        while (rs.next())
+            result.add(Integer.toString(rs.getInt("cID")));
+        return result;
+    }
+    
 }

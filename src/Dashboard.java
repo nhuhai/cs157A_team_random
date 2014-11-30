@@ -100,9 +100,6 @@ public class Dashboard extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
         reserveList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                reserveListMousePressed(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 reserveListMouseClicked(evt);
             }
@@ -165,11 +162,9 @@ public class Dashboard extends javax.swing.JFrame {
         openingFrame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void reserveListMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserveListMousePressed
-    }//GEN-LAST:event_reserveListMousePressed
-
     private void reserveListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserveListMouseClicked
-        JOptionPane.showMessageDialog(null, "test2");
+        UpdateFrame updateFrame = new UpdateFrame();
+        updateFrame.setVisible(true);
     }//GEN-LAST:event_reserveListMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
