@@ -166,7 +166,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void reserveListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reserveListMouseClicked
         Utility.close(this);
-        UpdateFrame updateFrame = new UpdateFrame(this.username);
+        UpdateFrame updateFrame = new UpdateFrame(this.username, this.reserveList.getSelectedValue().toString());
         updateFrame.setVisible(true);
     }//GEN-LAST:event_reserveListMouseClicked
 

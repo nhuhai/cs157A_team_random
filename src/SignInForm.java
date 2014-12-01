@@ -142,7 +142,7 @@ public class SignInForm extends javax.swing.JFrame {
         if (usernameStr.length() > 0 && passwordStr.length() > 0) {
             try {
                 if (TennisDatabase.memberExists(usernameStr, passwordStr)) { 
-                    JOptionPane.showMessageDialog(null, "Signed In!");
+//                    JOptionPane.showMessageDialog(null, "Signed In!");
                     Utility.close(this);
 
                     Dashboard dashboard = new Dashboard(usernameStr);

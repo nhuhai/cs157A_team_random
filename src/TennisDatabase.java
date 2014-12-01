@@ -145,7 +145,7 @@ public class TennisDatabase {
             
             int time = rs.getInt("reserveTime");
             
-            String outStr = "You've reserved " + "court #" + courtID + " on " + date + " at " + time;
+            String outStr = "You've reserved " + "court# " + courtID + " on " + date + " at " + time;
             result.add(outStr);
         }
         
@@ -165,6 +165,17 @@ public class TennisDatabase {
         while (rs.next())
             result.add(Integer.toString(rs.getInt("cID")));
         return result;
+    }
+    
+    public static void deleteReservation(String username, String date, String time, String courtID) throws SQLException {
+        String sql = "DELETE FROM RESERVATION where username = ? and reserveDate = ? and reserveTime = ? and cID = ?";
+        
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, username);
+        pst.setString(2, date);
+        pst.setString(3, time);
+        pst.setString(4, courtID);
+        pst.executeUpdate();        
     }
     
 }

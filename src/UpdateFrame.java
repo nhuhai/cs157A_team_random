@@ -1,7 +1,10 @@
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,9 +20,22 @@ public class UpdateFrame extends javax.swing.JFrame {
     /**
      * Creates new form UpdateFrame
      */
-    public UpdateFrame(String username) {
+    public UpdateFrame(String username, String reservationInfo) {
         this.username = username;
         initComponents();
+        StringTokenizer str = new StringTokenizer(reservationInfo);
+        ArrayList<String> tokens = new ArrayList<>();
+        while(str.hasMoreTokens())
+            tokens.add(str.nextToken());
+        
+        this.courtNumLabel.setText(tokens.get(3));
+        this.reservedCID = tokens.get(3);
+        
+        this.dateLabel.setText(tokens.get(5));
+        this.reservedDate = tokens.get(5);
+        
+        this.timeLabel.setText(tokens.get(7));
+        this.reservedTime = tokens.get(7);
     }
 
     /**
@@ -37,11 +53,11 @@ public class UpdateFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
-        dateLabel1 = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
         courtNumLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        cancelActionButton = new javax.swing.JButton();
+        closeActionButton = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Reservation Infomation", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times", 1, 18))); // NOI18N
 
@@ -59,7 +75,7 @@ public class UpdateFrame extends javax.swing.JFrame {
             }
         });
 
-        dateLabel1.setText("date");
+        dateLabel.setText("date");
 
         timeLabel.setText("time");
 
@@ -73,8 +89,8 @@ public class UpdateFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(dateLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
+                    .addComponent(dateLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(timeLabel))
@@ -82,7 +98,7 @@ public class UpdateFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(courtNumLabel))
-                .addGap(18, 18, 18)
+                .addGap(73, 73, 73)
                 .addComponent(deleteButton)
                 .addContainerGap())
         );
@@ -95,7 +111,7 @@ public class UpdateFrame extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateLabel1)
+                    .addComponent(dateLabel)
                     .addComponent(timeLabel)
                     .addComponent(courtNumLabel)
                     .addComponent(deleteButton))
@@ -115,10 +131,10 @@ public class UpdateFrame extends javax.swing.JFrame {
             .addGap(0, 163, Short.MAX_VALUE)
         );
 
-        cancelActionButton.setText("Cancel");
-        cancelActionButton.addActionListener(new java.awt.event.ActionListener() {
+        closeActionButton.setText("Close");
+        closeActionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelActionButtonActionPerformed(evt);
+                closeActionButtonActionPerformed(evt);
             }
         });
 
@@ -132,7 +148,7 @@ public class UpdateFrame extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(cancelActionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(closeActionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +157,7 @@ public class UpdateFrame extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cancelActionButton)
+                .addComponent(closeActionButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -151,10 +167,30 @@ public class UpdateFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+        Object[] options = {"No", "Yes"};
+        int op = JOptionPane.showOptionDialog(this,
+            "Would you like to cancel current reservation?",
+            "",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            options[0]);
+        if (op == 1) {
+            try {
+                TennisDatabase.deleteReservation(username, this.reservedDate, this.reservedTime, this.reservedCID);
+            } catch (SQLException ex) {
+                Logger.getLogger(UpdateFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.closeUpdateFrame();
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void cancelActionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionButtonActionPerformed
+    private void closeActionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionButtonActionPerformed
+        this.closeUpdateFrame();
+    }//GEN-LAST:event_closeActionButtonActionPerformed
+
+    private void closeUpdateFrame() {
         Utility.close(this);
         Dashboard dashboard;
         try {
@@ -163,51 +199,17 @@ public class UpdateFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(UpdateFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(this.username);
-        
-    }//GEN-LAST:event_cancelActionButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(UpdateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(UpdateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(UpdateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(UpdateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new UpdateFrame(username).setVisible(true);
-//            }
-//        });
-//    }
-    
+    }
+  
     private final String username;
+    private String reservedDate;
+    private String reservedTime;
+    private String reservedCID;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelActionButton;
+    private javax.swing.JButton closeActionButton;
     private javax.swing.JLabel courtNumLabel;
-    private javax.swing.JLabel dateLabel1;
+    private javax.swing.JLabel dateLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
