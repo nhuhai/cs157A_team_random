@@ -129,6 +129,10 @@ public class OpeningFrame extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         
+        // Hard-coded manager username
+        // When a user signs in, we'll compare that with the these managers,
+        // If they match, then display manager view
+        
         TennisDatabase.connectToDatabase();
         
         /* Create and display the form */
