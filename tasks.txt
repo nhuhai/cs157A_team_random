@@ -18,7 +18,7 @@ reserveDate=’2014-11-12’ and time = 9;
 - then update user's balance as well (subtract) - make a trigger for that too
 
 
-Below are manager's functions
+Below are manager's functions - From the 7th requirement to the end in the google doc
 
 4. View all reservations:
 		SELECT * FROM Reservation;
