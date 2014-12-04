@@ -127,6 +127,25 @@ public class TennisDatabase {
         }
     }
     
+    // -- BorrowEquipment (username, reserveDate, numberBrackets, returned)
+    public static int reserveEquipment(String username, Date reserveDate, int numberBrackets, boolean returned) throws SQLException {
+        String sql = "INSERT INTO EQUIPMENT (username, borrowDate, numRacket, returned) VALUES (?, ?, ?, ?)"; 
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, username);
+            pst.setDate(2, reserveDate);
+            pst.setInt(3, numberBrackets);
+            pst.setBoolean(4, returned);
+            
+            int result = pst.executeUpdate();
+            
+            return result;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return 0;
+        }
+    }
+    
     // -- RESERVATION (username, cID, reserveDate, reserveTime, paid)
     public static ArrayList<String> getReservation(String username) throws SQLException {
         ArrayList<String> result = new ArrayList<String>();

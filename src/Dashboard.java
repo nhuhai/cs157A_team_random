@@ -107,6 +107,11 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane1.setViewportView(reserveList);
 
         borrowButton.setText("Borrow Equipment");
+        borrowButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrowButtonActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Exit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +174,12 @@ public class Dashboard extends javax.swing.JFrame {
         UpdateFrame updateFrame = new UpdateFrame(this.username, this.reserveList.getSelectedValue().toString());
         updateFrame.setVisible(true);
     }//GEN-LAST:event_reserveListMouseClicked
+
+    private void borrowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowButtonActionPerformed
+        Utility.close(this);
+        EquipmentForm borrowForm = new EquipmentForm(this.username);
+        borrowForm.setVisible(true);
+    }//GEN-LAST:event_borrowButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrowButton;
