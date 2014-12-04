@@ -9,7 +9,7 @@ CREATE TABLE MEMBER (
 	username VARCHAR(50),
 	password VARCHAR(50),
 	name VARCHAR(50),
-	level INT DEFAULT 0,
+	level INT DEFAULT 0 REFERENCES DISCOUNT(level),
 	PRIMARY KEY(username)
 );
 
@@ -20,6 +20,7 @@ CREATE TABLE COURT (
 	inside BOOLEAN DEFAULT FALSE,
 	VIP BOOLEAN DEFAULT FALSE,
 	pricePerHour INT,
+	balance DOUBLE, 
 	PRIMARY KEY(cID)
 );
 
@@ -27,11 +28,12 @@ CREATE TABLE COURT (
 DROP TABLE IF EXISTS RESERVATION;
 CREATE TABLE RESERVATION (
 	username VARCHAR(50),
-	cID INT,
+	cID INT REFERENCES COURT(cID),
 	reserveDate DATE DEFAULT '0000-00-00',
 	reserveTime INT,
 	paid BOOLEAN DEFAULT FALSE,
-	PRIMARY KEY(username,cID,reserveDate,reserveTime)
+	PRIMARY KEY(username,cID,reserveDate,reserveTime),
+	FOREIGN KEY(username) REFERENCES MEMBER(username) ON DELETE CASCADE
 );
 
 -- EQUIPMENT (username, borrowDate, numRacket, returned)
@@ -41,7 +43,8 @@ CREATE TABLE EQUIPMENT (
 	borrowDate DATE DEFAULT '0000-00-00',
 	numRacket INT,
 	returned BOOLEAN DEFAULT FALSE,
-	PRIMARY KEY(username,borrowDate)
+	PRIMARY KEY(username,borrowDate),
+	FOREIGN KEY(username) REFERENCES MEMBER(username) ON DELETE CASCADE
 );
 
 -- DISCOUNT (level, percent)
