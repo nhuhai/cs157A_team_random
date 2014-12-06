@@ -51,13 +51,15 @@ public class TennisDatabase {
     
     public static int addMember(String username, String password, String name) 
             throws SQLException {
-        String sql = "INSERT INTO Member (username, password, name) VALUES (?, ?, ?)"; 
+        String sql = "INSERT INTO Member (username, password, name, updatedAt) VALUES (?, ?, ?, ?)"; 
+        long currentTime = System.currentTimeMillis();
+        java.sql.Date date = new Date(currentTime);
         try {
             pst = conn.prepareStatement(sql);
             pst.setString(1, username);
             pst.setString(2, password);
             pst.setString(3, name);
-            
+            pst.setDate(4, date);
             int result = pst.executeUpdate();
             
             return result;
@@ -121,14 +123,17 @@ public class TennisDatabase {
     // -- RESERVATION (username, cID, reserveDate, reserveTime, paid)
     public static int reserveCourt(String username, int courtID, 
             Date reserveDate, int reserveTime) throws SQLException {
-        String sql = "INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime) VALUES (?, ?, ?, ?)"; 
+        String sql = "INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES (?, ?, ?, ?, ?)"; 
+        long currentTime = System.currentTimeMillis();
+        java.sql.Date date = new Date(currentTime);
+        
         try {
             pst = conn.prepareStatement(sql);
             pst.setString(1, username);
             pst.setInt(2, courtID);
             pst.setDate(3, reserveDate);
             pst.setInt(4, reserveTime);
-            
+            pst.setDate(5, date);
             int result = pst.executeUpdate();
             
             return result;
@@ -140,14 +145,16 @@ public class TennisDatabase {
     
     // -- BorrowEquipment (username, reserveDate, numberBrackets, returned)
     public static int reserveEquipment(String username, Date reserveDate, int numberBrackets, boolean returned) throws SQLException {
-        String sql = "INSERT INTO EQUIPMENT (username, borrowDate, numRacket, returned) VALUES (?, ?, ?, ?)"; 
+        String sql = "INSERT INTO EQUIPMENT (username, borrowDate, numRacket, returned, updatedAt) VALUES (?, ?, ?, ?, ?)"; 
+        long currentTime = System.currentTimeMillis();
+        java.sql.Date date = new Date(currentTime);
         try {
             pst = conn.prepareStatement(sql);
             pst.setString(1, username);
             pst.setDate(2, reserveDate);
             pst.setInt(3, numberBrackets);
             pst.setBoolean(4, returned);
-            
+            pst.setDate(5, date);
             int result = pst.executeUpdate();
             
             return result;

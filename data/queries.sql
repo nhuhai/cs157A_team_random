@@ -31,5 +31,12 @@ String sql = "SELECT distinct(cID) FROM RESERVATION where reserveDate = ? and re
 -- public static void deleteReservation(String username, String date, String time, String courtID)
 String sql = "DELETE FROM RESERVATION where username = ? and reserveDate = ? and reserveTime = ? and cID = ?";
 
-
-
+-- Stored Proc -- Transactions -- Archive relations
+DROP PROCEDURE IF EXISTS ArchiveMember;
+DELIMITER //
+CREATE PROCEDURE ArchiveMember(IN cutoffDate DATE) 
+BEGIN
+	Insert into MEMBER_ARCHIVED(username, password, name, level, updatedAt) values (Member.username, Member.password, Member.name, Member.level, Member.updatedAt)
+	where Member.updatedAt
+END//
+DELIMITER ;
