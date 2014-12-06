@@ -61,6 +61,12 @@
                       <Component id="updateMemberButton" alignment="1" pref="528" max="32767" attributes="0"/>
                       <Component id="viewReservationButton" alignment="1" max="32767" attributes="0"/>
                       <Component id="viewMemberButton" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="deleteCourtTextField" min="-2" pref="87" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="deleteCourtButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -75,7 +81,12 @@
                   <Component id="viewReservationButton" min="-2" pref="46" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="viewMemberButton" min="-2" pref="46" max="-2" attributes="0"/>
-                  <EmptySpace pref="243" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="deleteCourtTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="deleteCourtButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="194" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -95,6 +106,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="View All Members"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="deleteCourtTextField">
+        </Component>
+        <Component class="javax.swing.JButton" name="deleteCourtButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Delete Court"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteCourtButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
