@@ -37,6 +37,15 @@ DELIMITER //
 CREATE PROCEDURE ArchiveMember(IN cutoffDate DATE) 
 BEGIN
 	Insert into MEMBER_ARCHIVED(username, password, name, level, updatedAt) values (Member.username, Member.password, Member.name, Member.level, Member.updatedAt)
-	where Member.updatedAt < cutoffDate
+	where Member.updatedAt == DATE
 END//
 DELIMITER ;
+
+-- Trigger -- Delete reservations when delete court
+CREATE TRIGGER DELETE_COURT_TRIGGER
+AFTER DELETE ON COURT
+FOR EACH ROW
+BEGIN
+	DELETE FROM RESERVATION
+	WHERE cID = old.cID
+END;

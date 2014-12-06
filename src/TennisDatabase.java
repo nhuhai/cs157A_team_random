@@ -242,4 +242,11 @@ public class TennisDatabase {
         pst.executeUpdate();        
     }
     
+    public static void deleteCourt(int cID) throws SQLException {
+        String sql = "DELETE FROM court WHERE cID = ?";
+        
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1, cID);
+        pst.executeUpdate();
+    }
 }
