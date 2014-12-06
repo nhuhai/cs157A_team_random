@@ -40,3 +40,12 @@ BEGIN
 	where Member.updatedAt
 END//
 DELIMITER ;
+
+-- Trigger -- Delete reservations when delete court
+CREATE TRIGGER DELETE_COURT_TRIGGER
+AFTER DELETE ON COURT
+FOR EACH ROW
+BEGIN
+	DELETE FROM RESERVATION
+	WHERE cID = old.cID
+END;
