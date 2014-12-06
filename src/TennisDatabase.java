@@ -107,6 +107,17 @@ public class TennisDatabase {
         return count > 0;
     }
     
+    public static Boolean memberExists(String username) throws SQLException {
+        String sql = "SELECT count(*) AS count FROM MEMBER WHERE username = \"" + username;
+        int count = 0;
+        
+        while (rs.next()) {
+            count = rs.getInt("count");
+        }
+        
+        return count > 0;
+    }
+    
     // -- RESERVATION (username, cID, reserveDate, reserveTime, paid)
     public static int reserveCourt(String username, int courtID, 
             Date reserveDate, int reserveTime) throws SQLException {
@@ -136,6 +147,32 @@ public class TennisDatabase {
             pst.setDate(2, reserveDate);
             pst.setInt(3, numberBrackets);
             pst.setBoolean(4, returned);
+            
+            int result = pst.executeUpdate();
+            
+            return result;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return 0;
+        }
+    }
+    
+    public static int updateReservation(
+            Date oldDate, int oldCourtID, int oldTime, 
+            Date newDate, int newCourtID, int newTime) {
+        
+        String sql = "UPDATE RESERVATION "
+                + "SET cID = ?, reserveDate = ?, reserveTime = ? "
+                + "WHERE cID = ? and reserveDate = ? and reserveTime = ?";
+        
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, newCourtID);
+            pst.setDate(2, newDate);
+            pst.setInt(3, newTime);
+            pst.setInt(4, oldCourtID);
+            pst.setDate(5, oldDate);
+            pst.setInt(6, oldTime);
             
             int result = pst.executeUpdate();
             
@@ -185,6 +222,7 @@ public class TennisDatabase {
             result.add(Integer.toString(rs.getInt("cID")));
         return result;
     }
+    
     
     public static void deleteReservation(String username, String date, String time, String courtID) throws SQLException {
         String sql = "DELETE FROM RESERVATION where username = ? and reserveDate = ? and reserveTime = ? and cID = ?";
