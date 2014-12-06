@@ -37,7 +37,7 @@ DELIMITER //
 CREATE PROCEDURE ArchiveMember(IN cutoffDate DATE) 
 BEGIN
 	Insert into MEMBER_ARCHIVED(username, password, name, level, updatedAt) values (Member.username, Member.password, Member.name, Member.level, Member.updatedAt)
-	where Member.updatedAt
+	where Member.updatedAt == DATE
 END//
 DELIMITER ;
 
