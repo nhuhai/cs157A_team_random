@@ -144,16 +144,9 @@ public class SignInForm extends javax.swing.JFrame {
                 if (TennisDatabase.memberExists(usernameStr, passwordStr)) { 
 //                    JOptionPane.showMessageDialog(null, "Signed In!");
                     Utility.close(this);
-                    if (usernameStr.equals("manager")) {
-                        ManagerDashboard dashboard = new ManagerDashboard();
-                        dashboard.setVisible(true);
 
-                    } else {
-                        Dashboard dashboard = new Dashboard(usernameStr);
-                        dashboard.setVisible(true);
-
-                    }
-
+                    Dashboard dashboard = new Dashboard(usernameStr);
+                    dashboard.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Wrong Username or Password! Or Member doesn't exist!");
                 }
