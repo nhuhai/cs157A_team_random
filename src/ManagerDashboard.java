@@ -1,4 +1,7 @@
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -116,6 +119,13 @@ public class ManagerDashboard extends javax.swing.JFrame {
             null,
             options,
             options[0]);
+        if (op == 1) {
+            try {
+                TennisDatabase.deleteCourt(new Integer(deleteCourtTextField.getText()));
+            } catch (SQLException ex) {
+                Logger.getLogger(UpdateFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_deleteCourtButtonActionPerformed
 
     /**
