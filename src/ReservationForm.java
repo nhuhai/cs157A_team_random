@@ -170,8 +170,8 @@ public class ReservationForm extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         int cID = Integer.parseInt(courtID.getText());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");    
         
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");           
         long currentTime = System.currentTimeMillis();
         java.sql.Date date = new Date(currentTime);
 
@@ -222,7 +222,7 @@ public class ReservationForm extends javax.swing.JFrame {
                     courts.add(Integer.toString(i));
                 for (String l : courtList)
                     courts.remove(l);
-                
+
                 String str = "Available courts: ";
                 for (String s : courts)
                     str += s + " ";
@@ -231,6 +231,7 @@ public class ReservationForm extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ReservationForm.class.getName()).log(Level.SEVERE, null, ex);
         } 
+        
     }//GEN-LAST:event_showAvailCourtButtonActionPerformed
 
     
