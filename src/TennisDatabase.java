@@ -194,7 +194,7 @@ public class TennisDatabase {
     public static ArrayList<String> getReservation(String username) throws SQLException {
         ArrayList<String> result = new ArrayList<String>();
         
-        String sql = "SELECT * FROM RESERVATION where username = ?";
+        String sql = "SELECT * FROM RESERVATION where username = ? ORDER BY reserveDate, reserveTime, cID";
         pst = conn.prepareStatement(sql);
         pst.setString(1,username);
         rs = pst.executeQuery();
