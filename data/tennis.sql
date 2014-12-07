@@ -31,7 +31,6 @@ CREATE TABLE COURT (
 	inside BOOLEAN DEFAULT FALSE,
 	VIP BOOLEAN DEFAULT FALSE,
 	pricePerHour INT,
-	balance DOUBLE, 
 	PRIMARY KEY(cID)
 );
 
@@ -92,25 +91,37 @@ CREATE TABLE DISCOUNT (
 );
 
 DROP TRIGGER IF EXISTS DELETE_COURT_TRIGGER;
+DELIMITER //
 CREATE TRIGGER DELETE_COURT_TRIGGER
 AFTER DELETE ON COURT
 FOR EACH ROW
 BEGIN
 	DELETE FROM RESERVATION
 	WHERE cID = old.cID
-END;
+END//
+DELIMITER ;
 
 DROP TRIGGER IF EXISTS MAX_THREE_RESERVATIONS_PER_DAY_TRIGGER;
 DELIMITER //
 CREATE TRIGGER MAX_THREE_RESERVATIONS_PER_DAY_TRIGGER
-BEFORE INSERT ON RESERVATION
+BEFORE INSERT ON RESERVATION 
 FOR EACH ROW
 BEGIN
-	IF ((SELECT COUNT(*) FROM RESERVATION WHERE reserveDate = new.reserveDate GROUP BY username) <= 3) THEN
-		INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES (new.username, new.cID, new.reserveDate, new.reserveTime, new.updatedAt);
+	DECLARE msg VARCHAR(255);
+	IF (SELECT COUNT(*) AS count 
+		FROM RESERVATION 
+		WHERE reserveDate = new.reserveDate 
+		GROUP BY username 
+		HAVING count > 3 
+		IS NOT NULL) THEN
+			SET msg = 'Error. You cannot reserve more than 3 times on the same day.';
+			SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
 	END IF;
 END//
 DELIMITER ;
+
+	-- INSERT INTO nt (username, cID, reserveDate, reserveTime) VALUES (new.username, new.cID, new.reserveDate, new.reserveTime);
+
 
 -- LOAD DATA LOCAL INFILE 'court.txt' INTO TABLE COURT;
 -- LOAD DATA LOCAL INFILE 'discount.txt' INTO TABLE DISCOUNT;
