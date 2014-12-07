@@ -215,6 +215,33 @@ public class TennisDatabase {
         return result;
     }
     
+    public static ArrayList<String> getEquipment(String username) throws SQLException {
+    ArrayList<String> result = new ArrayList<String>();
+        
+        String sql = "SELECT * FROM EQUIPMENT where username = ? ORDER BY returned, borrowDate";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1,username);
+        rs = pst.executeQuery();
+        
+        while(rs.next()) {
+            String thisUsername = rs.getString("username"); 
+            Date borrowDate = rs.getDate("borrowDate");
+            int numRacket = rs.getInt("numRacket");
+            boolean returned = rs.getBoolean("returned");
+            
+            String isReturned = null;
+            if (returned == true)
+                isReturned = "Returned";
+            else
+                isReturned = "Not returned";
+            
+            String outStr = "You've reserved " + numRacket + " rackets on " + borrowDate + ". " + isReturned;
+            result.add(outStr);
+        }
+        
+        return result; 
+    }
+    
     public static ArrayList<String> getAvailableCourtsForDateAndTime(String date, String time) throws SQLException {
         ArrayList<String> result = new ArrayList<String>();
         

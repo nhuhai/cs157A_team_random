@@ -121,7 +121,6 @@ BEGIN
 END//
 DELIMITER ;
 
-<<<<<<< HEAD
 -- Trigger #3
 DROP TRIGGER IF EXISTS INSERT_SAME_USERNAME_TO_MEMBER_ARCHIVED_TRIGGER;
 DELIMITER //
@@ -189,6 +188,7 @@ INSERT INTO DISCOUNT(level, percent) VALUES (5, 25);
 INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('abc', 'abc', 'ABC', 0, '2010-12-01');
 INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('def', 'def', 'DEF', 0, '2010-12-14');
 INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('ghi', 'ghi', 'GHI', 0, '2010-12-25');
+INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('archive', '123', 'Test Archive', 0, '2010-12-25');
 
 CALL ArchiveMember('2010-12-25');
 
@@ -197,3 +197,11 @@ SET updatedAt = '2011-11-01'
 WHERE username='abc';
 
 CALL ArchiveMember('2010-12-25');
+
+INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES ('archive', 1, '2013-1-13', 9, '2010-12-25');
+INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES ('archive', 2, '2013-1-13', 9, '2010-12-25');
+INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES ('archive', 3, '2013-1-14', 9, '2010-12-25');
+
+INSERT INTO EQUIPMENT (username, borrowDate, numRacket, returned, updatedAt) VALUES ('archive', '2013-1-1', 2, 1, '2012-5-5');
+INSERT INTO EQUIPMENT (username, borrowDate, numRacket, returned, updatedAt) VALUES ('archive', '2013-1-3', 2, 1, '2012-5-7');
+INSERT INTO EQUIPMENT (username, borrowDate, numRacket, returned, updatedAt) VALUES ('archive', '2010-1-5', 2, 0, '2013-5-9');
