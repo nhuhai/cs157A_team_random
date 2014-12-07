@@ -109,8 +109,8 @@ BEGIN
 		FROM RESERVATION 
 		WHERE reserveDate = new.reserveDate 
 		GROUP BY username 
-		HAVING count > 3 
-		IS NOT NULL) THEN
+		HAVING count >= 3) 
+		IS NOT NULL THEN
 			SET msg = 'Error. You cannot reserve more than 3 times on the same day.';
 			SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg;
 	END IF;
@@ -177,6 +177,7 @@ INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('archive',
 
 INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES ('archive', 1, '2013-1-13', 9, '2010-12-25');
 INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES ('archive', 2, '2013-1-13', 9, '2010-12-25');
+INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES ('archive', 3, '2013-1-13', 9, '2010-12-25');
 INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES ('archive', 3, '2013-1-14', 9, '2010-12-25');
 
 INSERT INTO EQUIPMENT (username, borrowDate, numRacket, returned, updatedAt) VALUES ('archive', '2013-1-1', 2, 1, '2012-5-5');

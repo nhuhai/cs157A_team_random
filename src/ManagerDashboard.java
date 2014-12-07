@@ -38,7 +38,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
         deleteCourtTextField = new javax.swing.JTextField();
         deleteCourtButton = new javax.swing.JButton();
         addCourtButton = new javax.swing.JButton();
-        viewMemberButton1 = new javax.swing.JButton();
+        viewMemberProfileButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,7 +64,12 @@ public class ManagerDashboard extends javax.swing.JFrame {
 
         addCourtButton.setText("Add Court");
 
-        viewMemberButton1.setText("Manage Court");
+        viewMemberProfileButton.setText("View Member Profile");
+        viewMemberProfileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewMemberProfileButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -83,7 +88,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addCourtButton)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(viewMemberButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(viewMemberProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -101,7 +106,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
                     .addComponent(deleteCourtButton)
                     .addComponent(addCourtButton))
                 .addGap(18, 18, 18)
-                .addComponent(viewMemberButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(viewMemberProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(130, Short.MAX_VALUE))
         );
 
@@ -151,6 +156,13 @@ public class ManagerDashboard extends javax.swing.JFrame {
         searchMember.setVisible(true);
     }//GEN-LAST:event_updateMemberButtonActionPerformed
 
+    private void viewMemberProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMemberProfileButtonActionPerformed
+        // TODO add your handling code here:
+        Utility.close(this);
+        SearchMemberProfile searchMember = new SearchMemberProfile();
+        searchMember.setVisible(true);
+    }//GEN-LAST:event_viewMemberProfileButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -193,7 +205,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton updateMemberButton;
     private javax.swing.JButton viewMemberButton;
-    private javax.swing.JButton viewMemberButton1;
+    private javax.swing.JButton viewMemberProfileButton;
     private javax.swing.JButton viewReservationButton;
     // End of variables declaration//GEN-END:variables
 }
