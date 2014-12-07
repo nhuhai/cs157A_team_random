@@ -117,8 +117,6 @@ BEGIN
 END//
 DELIMITER ;
 
-
-
 -- Stored-Procedure #1
 DROP PROCEDURE IF EXISTS ArchiveMember;
 DELIMITER //
@@ -153,7 +151,6 @@ BEGIN
 	COMMIT;
 END//
 DELIMITER ; 
-CALL ArchiveEquipment('2010-12-25');
 
 -- LOAD DATA LOCAL INFILE 'court.txt' INTO TABLE COURT;
 INSERT INTO COURT(cID, inside, VIP, pricePerHour) VALUES (1, 0, 0, 10);
@@ -176,20 +173,12 @@ INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('manager',
 INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('abc', 'abc', 'ABC', 0, '2010-12-01');
 INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('def', 'def', 'DEF', 0, '2010-12-14');
 INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('ghi', 'ghi', 'GHI', 0, '2010-12-25');
+INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('archive', '123', 'Test Archive', 0, '2010-12-25');
 
+INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES ('archive', 1, '2013-1-13', 9, '2010-12-25');
+INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES ('archive', 2, '2013-1-13', 9, '2010-12-25');
+INSERT INTO RESERVATION (username, cID, reserveDate, reserveTime, updatedAt) VALUES ('archive', 3, '2013-1-14', 9, '2010-12-25');
 
--- 0. test app first
--- 1. Insert more data for RESERVATION
--- 2. insert equipment data
--- 3. add a buttons to arhive stuffs
-
--- Trigger #3
--- DROP TRIGGER IF EXISTS INSERT_SAME_USERNAME_TO_MEMBER_ARCHIVED_TRIGGER;
--- DELIMITER //
--- CREATE TRIGGER INSERT_SAME_USERNAME_TO_MEMBER_ARCHIVED_TRIGGER
--- BEFORE INSERT ON MEMBER_ARCHIVED
--- FOR EACH ROW
--- BEGIN
---	DELETE FROM MEMBER_ARCHIVED WHERE username = NEW.username;
---END//
---DELIMITER ;
+INSERT INTO EQUIPMENT (username, borrowDate, numRacket, returned, updatedAt) VALUES ('archive', '2013-1-1', 2, 1, '2012-5-5');
+INSERT INTO EQUIPMENT (username, borrowDate, numRacket, returned, updatedAt) VALUES ('archive', '2013-1-3', 2, 1, '2012-5-7');
+INSERT INTO EQUIPMENT (username, borrowDate, numRacket, returned, updatedAt) VALUES ('archive', '2010-1-5', 2, 0, '2013-5-9');
