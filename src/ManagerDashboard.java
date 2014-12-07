@@ -38,11 +38,16 @@ public class ManagerDashboard extends javax.swing.JFrame {
         deleteCourtTextField = new javax.swing.JTextField();
         deleteCourtButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Manager Profile", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18))); // NOI18N
 
         updateMemberButton.setText("Update Member Information");
+        updateMemberButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateMemberButtonActionPerformed(evt);
+            }
+        });
 
         viewReservationButton.setText("View All Reservation");
 
@@ -127,6 +132,12 @@ public class ManagerDashboard extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_deleteCourtButtonActionPerformed
+
+    private void updateMemberButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMemberButtonActionPerformed
+        Utility.close(this);
+        SearchMember searchMember = new SearchMember();
+        searchMember.setVisible(true);
+    }//GEN-LAST:event_updateMemberButtonActionPerformed
 
     /**
      * @param args the command line arguments

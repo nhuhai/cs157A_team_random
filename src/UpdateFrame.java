@@ -257,11 +257,11 @@ public class UpdateFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             ArrayList<String> courtList = TennisDatabase.getAvailableCourtsForDateAndTime(this.dateTextField.getText(), this.timeTextField.getText());
-            if (courtList.size() == 6) {
+            if (courtList.size() == 8) {
                 JOptionPane.showMessageDialog(null, "No courts are available at this time. Please choose some time.");
             } else {
                 ArrayList<String> courts = new ArrayList<>();
-                for (int i = 1; i <= 6; i++)
+                for (int i = 1; i <= 8; i++)
                     courts.add(Integer.toString(i));
                 for (String l : courtList)
                     courts.remove(l);

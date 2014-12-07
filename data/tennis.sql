@@ -19,7 +19,7 @@ CREATE TABLE MEMBER_ARCHIVED (
 	username VARCHAR(50),
 	password VARCHAR(50),
 	name VARCHAR(50),
-	level INT DEFAULT 0 REFERENCES DISCOUNT(level),
+	level INT DEFAULT 0,
 	updatedAt DATE DEFAULT '0000-00-00'
 );
 
@@ -49,13 +49,11 @@ CREATE TABLE RESERVATION (
 DROP TABLE IF EXISTS RESERVATION_ARCHIVED;
 CREATE TABLE RESERVATION_ARCHIVED (
 	username VARCHAR(50),
-	cID INT REFERENCES COURT(cID),
+	cID INT,
 	reserveDate DATE DEFAULT '0000-00-00',
 	reserveTime INT,
 	paid BOOLEAN DEFAULT FALSE,
-	updatedAt DATE DEFAULT '0000-00-00',
-	PRIMARY KEY(username,cID,reserveDate,reserveTime),
-	FOREIGN KEY(username) REFERENCES MEMBER(username) ON DELETE CASCADE
+	updatedAt DATE DEFAULT '0000-00-00'
 );
 
 -- EQUIPMENT (username, borrowDate, numRacket, returned)
@@ -76,9 +74,7 @@ CREATE TABLE EQUIPMENT_ARCHIVED (
 	borrowDate DATE DEFAULT '0000-00-00',
 	numRacket INT,
 	returned BOOLEAN DEFAULT FALSE,
-	updatedAt DATE DEFAULT '0000-00-00',
-	PRIMARY KEY(username,borrowDate),
-	FOREIGN KEY(username) REFERENCES MEMBER(username) ON DELETE CASCADE
+	updatedAt DATE DEFAULT '0000-00-00'
 );
 
 -- DISCOUNT (level, percent)
@@ -121,17 +117,7 @@ BEGIN
 END//
 DELIMITER ;
 
-<<<<<<< HEAD
--- Trigger #3
-DROP TRIGGER IF EXISTS INSERT_SAME_USERNAME_TO_MEMBER_ARCHIVED_TRIGGER;
-DELIMITER //
-CREATE TRIGGER INSERT_SAME_USERNAME_TO_MEMBER_ARCHIVED_TRIGGER
-BEFORE INSERT ON MEMBER_ARCHIVED
-FOR EACH ROW
-BEGIN
-	DELETE FROM MEMBER_ARCHIVED WHERE username = NEW.username;
-END//
-DELIMITER ;
+
 
 -- Stored-Procedure #1
 DROP PROCEDURE IF EXISTS ArchiveMember;
@@ -143,7 +129,7 @@ BEGIN
 	COMMIT;
 END//
 DELIMITER ; 
-CALL ArchiveMember('2010-12-25');
+-- CALL ArchiveMember('2010-12-25');
 
 -- Stored-Procedure #2
 DROP PROCEDURE IF EXISTS ArchiveReservation;
@@ -186,14 +172,24 @@ INSERT INTO DISCOUNT(level, percent) VALUES (3, 15);
 INSERT INTO DISCOUNT(level, percent) VALUES (4, 20);
 INSERT INTO DISCOUNT(level, percent) VALUES (5, 25);
 
+INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('manager', '123', 'MANAGER', 0, '2010-12-01');
 INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('abc', 'abc', 'ABC', 0, '2010-12-01');
 INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('def', 'def', 'DEF', 0, '2010-12-14');
 INSERT INTO MEMBER(username, password, name, level, updatedAt) VALUES('ghi', 'ghi', 'GHI', 0, '2010-12-25');
 
-CALL ArchiveMember('2010-12-25');
 
-UPDATE MEMBER
-SET updatedAt = '2011-11-01'
-WHERE username='abc';
+-- 0. test app first
+-- 1. Insert more data for RESERVATION
+-- 2. insert equipment data
+-- 3. add a buttons to arhive stuffs
 
-CALL ArchiveMember('2010-12-25');
+-- Trigger #3
+-- DROP TRIGGER IF EXISTS INSERT_SAME_USERNAME_TO_MEMBER_ARCHIVED_TRIGGER;
+-- DELIMITER //
+-- CREATE TRIGGER INSERT_SAME_USERNAME_TO_MEMBER_ARCHIVED_TRIGGER
+-- BEFORE INSERT ON MEMBER_ARCHIVED
+-- FOR EACH ROW
+-- BEGIN
+--	DELETE FROM MEMBER_ARCHIVED WHERE username = NEW.username;
+--END//
+--DELIMITER ;

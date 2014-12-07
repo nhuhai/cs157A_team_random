@@ -91,6 +91,19 @@ public class TennisDatabase {
         return currentUser;
     }
     
+        public static void updateUserInfo(String username, String name, String level) 
+            throws SQLException {
+        
+        ArrayList<String> currentUser = new ArrayList<String>();
+        String sql = "UPDATE MEMBER SET name = ?, level = ? WHERE username = ?";
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, name);
+        pst.setInt(2, Integer.parseInt(level));
+        pst.setString(3, username);
+        pst.executeUpdate();
+        
+    }
+        
     public static Boolean memberExists(String username, String password) 
             throws SQLException {
              
