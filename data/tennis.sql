@@ -124,4 +124,18 @@ DELIMITER ;
 
 
 -- LOAD DATA LOCAL INFILE 'court.txt' INTO TABLE COURT;
+INSERT INTO COURT(cID, inside, VIP, pricePerHour) VALUES (1, 0, 0, 10);
+INSERT INTO COURT(cID, inside, VIP, pricePerHour) VALUES (2, 1, 0, 15);
+INSERT INTO COURT(cID, inside, VIP, pricePerHour) VALUES (3, 0, 1, 20);
+INSERT INTO COURT(cID, inside, VIP, pricePerHour) VALUES (4, 1, 1, 30);
+INSERT INTO COURT(cID, inside, VIP, pricePerHour) VALUES (5, 0, 0, 10);
+INSERT INTO COURT(cID, inside, VIP, pricePerHour) VALUES (6, 1, 0, 15);
+INSERT INTO COURT(cID, inside, VIP, pricePerHour) VALUES (7, 0, 1, 20);
+INSERT INTO COURT(cID, inside, VIP, pricePerHour) VALUES (8, 1, 1, 30);
+
 -- LOAD DATA LOCAL INFILE 'discount.txt' INTO TABLE DISCOUNT;
+INSERT INTO DISCOUNT(level, percent) VALUES (1, 5);
+INSERT INTO DISCOUNT(level, percent) VALUES (2, 10);
+INSERT INTO DISCOUNT(level, percent) VALUES (3, 15);
+INSERT INTO DISCOUNT(level, percent) VALUES (4, 20);
+INSERT INTO DISCOUNT(level, percent) VALUES (5, 25);
