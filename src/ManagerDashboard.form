@@ -65,8 +65,11 @@
                           <Component id="deleteCourtTextField" min="-2" pref="148" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="deleteCourtButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="addCourtButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="viewMemberButton1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -85,8 +88,11 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="deleteCourtTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="deleteCourtButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="addCourtButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="194" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="viewMemberButton1" min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace pref="130" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -116,6 +122,16 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteCourtButtonActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="addCourtButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Add Court"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="viewMemberButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Manage Court"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -37,6 +37,8 @@ public class ManagerDashboard extends javax.swing.JFrame {
         viewMemberButton = new javax.swing.JButton();
         deleteCourtTextField = new javax.swing.JTextField();
         deleteCourtButton = new javax.swing.JButton();
+        addCourtButton = new javax.swing.JButton();
+        viewMemberButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +57,10 @@ public class ManagerDashboard extends javax.swing.JFrame {
             }
         });
 
+        addCourtButton.setText("Add Court");
+
+        viewMemberButton1.setText("Manage Court");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -69,7 +75,10 @@ public class ManagerDashboard extends javax.swing.JFrame {
                         .addComponent(deleteCourtTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(deleteCourtButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addCourtButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(viewMemberButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -84,8 +93,11 @@ public class ManagerDashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteCourtTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteCourtButton))
-                .addContainerGap(194, Short.MAX_VALUE))
+                    .addComponent(deleteCourtButton)
+                    .addComponent(addCourtButton))
+                .addGap(18, 18, 18)
+                .addComponent(viewMemberButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,11 +176,13 @@ public class ManagerDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addCourtButton;
     private javax.swing.JButton deleteCourtButton;
     private javax.swing.JTextField deleteCourtTextField;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton updateMemberButton;
     private javax.swing.JButton viewMemberButton;
+    private javax.swing.JButton viewMemberButton1;
     private javax.swing.JButton viewReservationButton;
     // End of variables declaration//GEN-END:variables
 }
